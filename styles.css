@@ -1,12 +1,216 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+  background: #0a0a0a;
+  color: #fff;
+}
+
+#upload-section {
+  padding: 40px;
+}
+
+#upload-section h2 {
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+#viewer-section h2 {
+  color: #4CAF50;
+  margin: 10px 0;
 }
 
 #canvas {
   width: 100%;
-  height: 80vh;
+  height: 100%;
   display: block;
-  margin: auto;
+  touch-action: none; /* Enable touch gestures for Three.js controls */
+}
+
+#canvas-container {
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  touch-action: none; /* Enable touch gestures for Three.js controls */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#info-panel {
+  width: 350px;
+  background: #1e1e1e;
+  border-left: 2px solid #333;
+  padding: 20px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+#info-panel h3 {
+  color: #4CAF50;
+  margin-top: 0;
+  font-size: 1.3em;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+#label-description {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  font-size: 0.95em;
+}
+
+#labels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label-item {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+
+.label-item:hover {
+  background: #3a3a3a;
+  border-color: #4CAF50;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.label-item.selected {
+  background: #4CAF50;
+  color: #000;
+  border-color: #4CAF50;
+}
+
+.label-item-number {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #4CAF50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1em;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.label-item.selected .label-item-number {
+  background: #000;
+  color: #4CAF50;
+  transform: scale(1.1);
+}
+
+.label-item-content {
+  flex: 1;
+  min-width: 0; /* Allows text to wrap properly */
+}
+
+.label-item-title {
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.label-item.selected .label-item-title {
+  color: #000;
+}
+
+.label-item-desc {
+  font-size: 0.8em;
+  color: #bbb;
+  line-height: 1.4;
+}
+
+.label-item.selected .label-item-desc {
+  color: #222;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #4CAF50;
+}
+
+button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+#status {
+  color: #4CAF50;
+  padding: 10px;
+}
+
+/* HTML Labels that track mesh centers */
+.html-label {
+  position: absolute;
+  background: rgba(76, 175, 80, 0.95);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+.html-label:hover {
+  background: rgba(76, 175, 80, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.html-label-number {
+  background: white;
+  color: #4CAF50;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.html-label-text {
+  font-size: 11px;
 }
